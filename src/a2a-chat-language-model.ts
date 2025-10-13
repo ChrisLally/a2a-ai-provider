@@ -156,7 +156,7 @@ class A2aChatLanguageModel implements LanguageModelV2 {
   ): Promise<Awaited<ReturnType<LanguageModelV2['doGenerate']>>> {
     const { args, warnings } = this.getArgs(options);
 
-    const client = new A2AClient(this.modelId);
+    const client = await A2AClient.fromCardUrl(this.modelId);
     const card = await client.getAgentCard();
     console.log('card', card)
     console.log('args', args)
@@ -212,7 +212,7 @@ class A2aChatLanguageModel implements LanguageModelV2 {
   ): Promise<Awaited<ReturnType<LanguageModelV2['doStream']>>> {
     const { args, warnings } = this.getArgs(options);
 
-    const client = new A2AClient(this.modelId);
+    const client = await A2AClient.fromCardUrl(this.modelId);
     const card = await client.getAgentCard();
     console.log('card', card)
 

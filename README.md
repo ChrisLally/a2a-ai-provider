@@ -31,7 +31,7 @@ import { generateText } from "ai"
 const chatId = "unique-chat-id"; // for each conversation to keep history in a2a server
 
 const result = await generateText({
-  model: a2a('https://your-a2a-server.example.com'),
+  model: a2a('https://your-a2a-server.example.com/.well-known/agent-card.json'),
   prompt: 'What is love?',
   providerOptions: {
     "a2a": {
@@ -52,7 +52,7 @@ import { streamText } from "ai"
 const chatId = "unique-chat-id"; // for each conversation to keep history in a2a server
 
 const streamResult = streamText({
-  model: a2a('https://your-a2a-server.example.com'),
+  model: a2a('https://your-a2a-server.example.com/.well-known/agent-card.json'),
   prompt: 'What is love?',
   providerOptions: {
     "a2a": {

@@ -13,11 +13,11 @@ const base64encodedTransparentGif = `R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAA
 
 
 const provider = createA2a({});
-const model = provider('http://localhost:41241');
+const model = provider('http://localhost:41241/.well-known/agent-card.json');
 
 const server = createTestServer({
     // hello world
-    'http://localhost:41241/.well-known/agent.json': {},
+    'http://localhost:41241/.well-known/agent-card.json': {},
     'http://localhost:41241/': {}
 });
 
@@ -32,7 +32,7 @@ describe('doGenerate', () => {
         result?: object;
         headers?: Record<string, string>;
     }) {
-        server.urls['http://localhost:41241/.well-known/agent.json'].response = {
+        server.urls['http://localhost:41241/.well-known/agent-card.json'].response = {
             type: 'json-value',
             headers,
             body: { "name": "Movie Agent", "description": "An agent that can answer questions about movies and actors using TMDB.", "url": "http://localhost:41241/", "provider": { "organization": "A2A Samples", "url": "https://example.com/a2a-samples" }, "version": "0.0.2", "capabilities": { "streaming": true, "pushNotifications": false, "stateTransitionHistory": true }, "defaultInputModes": ["text"], "defaultOutputModes": ["text", "task-status"], "skills": [{ "id": "general_movie_chat", "name": "General Movie Chat", "description": "Answer general questions or chat about movies, actors, directors.", "tags": ["movies", "actors", "directors"], "examples": ["Tell me about the plot of Inception.", "Recommend a good sci-fi movie.", "Who directed The Matrix?", "What other movies has Scarlett Johansson been in?", "Find action movies starring Keanu Reeves", "Which came out first, Jurassic Park or Terminator 2?"], "inputModes": ["text"], "outputModes": ["text", "task-status"] }], "supportsAuthenticatedExtendedCard": false },
@@ -257,7 +257,7 @@ describe('doStream', () => {
         headers?: Record<string, string>;
     }) {
 
-        server.urls['http://localhost:41241/.well-known/agent.json'].response = {
+        server.urls['http://localhost:41241/.well-known/agent-card.json'].response = {
             type: 'json-value',
             headers,
             body: { "name": "Movie Agent", "description": "An agent that can answer questions about movies and actors using TMDB.", "url": "http://localhost:41241/", "provider": { "organization": "A2A Samples", "url": "https://example.com/a2a-samples" }, "version": "0.0.2", "capabilities": { "streaming": true, "pushNotifications": false, "stateTransitionHistory": true }, "defaultInputModes": ["text"], "defaultOutputModes": ["text", "task-status"], "skills": [{ "id": "general_movie_chat", "name": "General Movie Chat", "description": "Answer general questions or chat about movies, actors, directors.", "tags": ["movies", "actors", "directors"], "examples": ["Tell me about the plot of Inception.", "Recommend a good sci-fi movie.", "Who directed The Matrix?", "What other movies has Scarlett Johansson been in?", "Find action movies starring Keanu Reeves", "Which came out first, Jurassic Park or Terminator 2?"], "inputModes": ["text"], "outputModes": ["text", "task-status"] }], "supportsAuthenticatedExtendedCard": false },
