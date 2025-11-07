@@ -182,8 +182,9 @@ class A2aChatLanguageModel implements LanguageModelV2 {
     // Add experimental_context to message if provided
     // This allows passing request-scoped context (like initiatingHumanId) through A2A protocol
     // The receiving agent can extract this from message.experimental_context
-    if (options.experimental_context) {
-      (sendParams.message as any).experimental_context = options.experimental_context;
+    // Note: experimental_context is not part of LanguageModelV2CallOptions type, but is passed by AI SDK
+    if ('experimental_context' in options && options.experimental_context) {
+      (sendParams.message as any).experimental_context = (options as any).experimental_context;
     }
 
     console.log('sendParams', sendParams.message.parts)
@@ -238,8 +239,9 @@ class A2aChatLanguageModel implements LanguageModelV2 {
     // Add experimental_context to message if provided
     // This allows passing request-scoped context (like initiatingHumanId) through A2A protocol
     // The receiving agent can extract this from message.experimental_context
-    if (options.experimental_context) {
-      (message as any).experimental_context = options.experimental_context;
+    // Note: experimental_context is not part of LanguageModelV2CallOptions type, but is passed by AI SDK
+    if ('experimental_context' in options && options.experimental_context) {
+      (message as any).experimental_context = (options as any).experimental_context;
     }
 
     try {
