@@ -179,6 +179,13 @@ class A2aChatLanguageModel implements LanguageModelV2 {
       sendParams.message.contextId = options.providerOptions?.a2a?.contextId as string;
     }
 
+    // Add experimental_context to message if provided
+    // This allows passing request-scoped context (like initiatingHumanId) through A2A protocol
+    // The receiving agent can extract this from message.experimental_context
+    if (options.experimental_context) {
+      (sendParams.message as any).experimental_context = options.experimental_context;
+    }
+
     console.log('sendParams', sendParams.message.parts)
 
     const sendResponse: SendMessageResponse = await client.sendMessage(sendParams);
@@ -226,6 +233,13 @@ class A2aChatLanguageModel implements LanguageModelV2 {
 
     if (options.providerOptions?.a2a?.contextId) {
       message.contextId = options.providerOptions?.a2a?.contextId as string;
+    }
+
+    // Add experimental_context to message if provided
+    // This allows passing request-scoped context (like initiatingHumanId) through A2A protocol
+    // The receiving agent can extract this from message.experimental_context
+    if (options.experimental_context) {
+      (message as any).experimental_context = options.experimental_context;
     }
 
     try {
